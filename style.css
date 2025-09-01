@@ -1,0 +1,28 @@
+body {
+  background: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+#lobby, #game, #chat {
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #fff;
+}
+button {
+  background: #111;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 5px 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+#hand button {
+  margin: 2px;
+}
+#messages {
+  height: 150px;
+  overflow-y: auto;
+  border: 1px solid #fff;
+  padding: 5px;
+}
