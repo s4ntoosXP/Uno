@@ -1,55 +1,63 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>UNO Online</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>UNO Online</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="lobby">
-    <h1>UNO Online</h1>
-    <input id="nickname" placeholder="Seu nome">
-    <button id="createRoom">Criar sala</button>
-    <input id="roomCode" placeholder="Código da sala">
-    <button id="joinRoom">Entrar na sala</button>
-    <p id="roomInfo"></p>
-    <div id="hostOptions" style="display:none;">
-      <label>Cartas iniciais:
-        <select id="startCards">
-          <option value="6">6</option>
-          <option value="12">12</option>
-          <option value="24">24</option>
-        </select>
-      </label>
-      <button id="startGame">Iniciar jogo</button>
+    <!-- TELA INICIAL -->
+    <div id="inicio" class="container">
+        <h1>🎮 UNO Online</h1>
+        <input type="text" id="nick" placeholder="Seu Nick" maxlength="15" required>
+        <div class="abas">
+            <button onclick="mostrarAba('criar')">Criar Sala</button>
+            <button onclick="mostrarAba('entrar')">Entrar na Sala</button>
+        </div>
+
+        <div id="criar-sala" class="aba">
+            <button onclick="criarSala()">Criar Sala</button>
+            <p id="codigo-sala"></p>
+        </div>
+
+        <div id="entrar-sala" class="aba" style="display:none">
+            <input type="text" id="codigo-input" placeholder="Código da Sala" maxlength="6">
+            <button onclick="entrarSala()">Entrar</button>
+        </div>
     </div>
-  </div>
 
-  <div id="game" style="display:none;">
-    <h2>Sala: <span id="roomDisplay"></span></h2>
-    <div id="players"></div>
-    <div id="table">
-      <p>Carta atual: <span id="currentCard"></span></p>
-      <div id="colorPicker" style="display:none;">
-        <button class="colorBtn" data-color="red">Vermelho</button>
-        <button class="colorBtn" data-color="blue">Azul</button>
-        <button class="colorBtn" data-color="green">Verde</button>
-        <button class="colorBtn" data-color="yellow">Amarelo</button>
-      </div>
+    <!-- TELA DA SALA -->
+    <div id="sala" class="container" style="display:none">
+        <h2>Sala: <span id="sala-codigo"></span></h2>
+        <p>Olá, <span id="jogador-nick"></span>!</p>
+        <div id="lista-jogadores"></div>
+        <button id="btn-iniciar" onclick="iniciarJogo()" style="display:none">Iniciar Jogo</button>
     </div>
-    <div id="hand"></div>
-    <button id="drawCard">Comprar</button>
-    <button id="passTurn">Passar</button>
-  </div>
 
-  <div id="chat">
-    <h3>Chat</h3>
-    <div id="messages"></div>
-    <input id="chatInput" placeholder="Mensagem">
-    <button id="sendChat">Enviar</button>
-  </div>
+    <!-- TELA DO JOGO -->
+    <div id="jogo" class="container" style="display:none">
+        <div id="info-jogo">
+            <h2>UNO - Sala: <span id="jogo-sala-codigo"></span></h2>
+            <p>Turno de: <span id="turno-jogador"></span></p>
+            <p>Carta Atual: <span id="carta-atual">Nenhuma</span></p>
+        </div>
 
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="script.js"></script>
+        <div id="area-cartas">
+            <div id="cartas-mesa">
+                <div id="descarte" class="slot">Descarte</div>
+                <div id="comprar" class="slot comprar">Comprar</div>
+            </div>
+            <div id="cartas-jogador"></div>
+        </div>
+
+        <div id="chat">
+            <h3>Chat</h3>
+            <div id="mensagens"></div>
+            <input type="text" id="input-chat" placeholder="Digite sua mensagem...">
+            <button onclick="enviarMensagem()">Enviar</button>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
 </body>
 </html>
